@@ -6,6 +6,8 @@ const listSchema = new Schema({
     type: { type: String },
     genre: { type: String },
     content: { type: Array }
+}, {
+    timestamps: true
 })
 
 const List = mongoose.model('List', listSchema);

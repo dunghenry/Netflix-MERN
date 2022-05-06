@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router();
-
-
-
-
+const moviesController = require("../controllers/moviesController");
+const { verifyTokenAndAdmin, verifyTokenAndAuthorization } = require('../middleware/verifyToken');
+router.post("/movie", verifyTokenAndAdmin, moviesController.createMovie);
+router.get("/movie", verifyTokenAndAuthorization, moviesController.getAllMovies);
+router.get("/movie/random", verifyTokenAndAuthorization, moviesController.getRandomMovie);
+router.get("/movie/:id", verifyTokenAndAuthorization, moviesController.getMovie);
+router.put("/movie/:id", verifyTokenAndAdmin, moviesController.updateMovie);
+router.delete("/movie/:id", verifyTokenAndAdmin, moviesController.deleteMovie);
 module.exports = router;

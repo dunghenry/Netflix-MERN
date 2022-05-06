@@ -31,7 +31,7 @@ const authController = {
         if(!req.body.username || !req.body.password) return res.status(400).json("Missing username or password!");
         try {
             const user = await User.findOne({ username: req.body.username });
-            if (!user) return res.status(401).json("Username not found or wrong username!");
+            if (!user) return res.status(404).json("Username not found or wrong username!");
             const validPassword = await bcrypt.compare(req.body.password, user.password);
             if (!validPassword) return res.status(401).json("Password is incorrect!");
             const { password, ...others } = user._doc;
